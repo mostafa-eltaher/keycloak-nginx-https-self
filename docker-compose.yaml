@@ -1,9 +1,14 @@
 version: '3'
 services:
   nginx:
-    build: .
+    build: 
+      context: .
+      args:
+        - server_name=$nginx_server_name
+        - host_port=$nginx_host_port
+        - cert_file=$nginx_cert_file
     ports:
-      - '8443:443'
+      - '$nginx_host_port:443'
   keycloak:
     image: 'jboss/keycloak'
     environment:
